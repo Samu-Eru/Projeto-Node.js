@@ -5,6 +5,7 @@ const router = Router()
 
 router.get('/turma', TurmaController.ObterTodasTurmas)
 router.get('/turma/:id', TurmaController.ObterTurmaPorId)
+router.get('/turma/:id/restore', TurmaController.RestaurarRegistro)
 router.post('/turma', TurmaController.Cadastrar)
 router.put('/turma/:id', TurmaController.Alterar)
 router.delete('/turma/:id', TurmaController.Deletar)
