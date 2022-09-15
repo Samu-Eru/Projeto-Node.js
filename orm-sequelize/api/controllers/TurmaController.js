@@ -1,16 +1,30 @@
-const { json } = require('body-parser')
-const { where } = require('sequelize')
 const database = require('../models')
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op
 
 class TurmaController {
     static async ObterTodasTurmas(req, res) {
+        const {data_inicial, data_final} = req.query
+        const where = {}
+        data_inicial || data_final ? where.data_inicio = {} : null
+        data_inicial ? where.data_inicio[Op.gte] = data_final : null
+        data_final ? where.data_inicio[Op.lte] = data_final: null
         try {
-            const todasAsTurmas = await database.Turmas.findAll()
+            const todasAsTurmas = await database.Turmas.findAll(where)
             return res.status(200).json(todasAsTurmas)
         } catch (error) {
             return res.status(500).json(error.message)
         }
     }
+
+    // {
+    //     where: {
+    //         data_inicio:{
+    //             [Op.gte]: data,
+    //             [op.lte]: data
+    //         }
+    //     }
+    // }
 
     static async ObterTurmaPorId(req,res) {
         const {id} = req.params

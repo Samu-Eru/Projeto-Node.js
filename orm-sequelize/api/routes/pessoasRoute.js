@@ -7,14 +7,16 @@ router.get('/pessoas/:estudanteId/matricula/:matriculaId', PessoaController.Obte
 router.get('/pessoas', PessoaController.ObterTodos)
 router.get('/pessoas/ativos', PessoaController.ObterTodosAtivos)
 router.get('/pessoas/:id', PessoaController.ObterPorID)
-
+router.get('/pessoas/:estudanteId/matriculas', PessoaController.ObterMatriculas)
+router.get('/pessoas/matriculas/lotadas', PessoaController.ObterTurmasLotadas)//cuidar com rotas iguas, rotas que esperam exatamente oq está escrito e outras que esperam variáveis 
+router.get('/pessoas/matriculas/:turmaId', PessoaController.ObterMatriculasPorTurma)
 router.get('/pessoas/:id/restore/', PessoaController.RestaurarRegistro)
 router.get('/pessoas/:estudanteId/matricula/:matriculaId/restore', PessoaController.RestaurarRegistroMatricula)
-
+router.post('/pessoas', PessoaController.Cadastrar)
 router.post('/pessoas', PessoaController.Cadastrar)
 router.post('/pessoas/:id/matricula', PessoaController.CadastrarMatricula)
 router.put('/pessoas/:id', PessoaController.Alterar)
-router.put('/pessoas/:estudanteId/matricula/:matriculaId', PessoaController.AlterarMatricula)
+router.post('/pessoas/:estudanteId/cancelar', PessoaController.CancelarMatricula)
 router.delete('/pessoas/:id', PessoaController.Deletar)
 router.delete('/matricula/:id', PessoaController.DeletarMatriculas)
 
