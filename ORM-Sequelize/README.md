@@ -1,0 +1,1 @@
+Sistema de controle de escola Utilizando MySql e Sequelize
