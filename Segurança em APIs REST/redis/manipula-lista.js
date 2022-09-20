@@ -1,5 +1,5 @@
 const { promisify } = require('util');
-const blocklist = require('./blocklist-access-token');
+//const blocklist = require('./blocklist-access-token');
 
 module.exports = lista => {
     const setAsync = promisify(lista.set).bind(lista);
