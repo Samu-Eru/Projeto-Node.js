@@ -6,7 +6,7 @@ module.exports = app => {
     .route('/post')
     .get(postsControlador.lista)
     .post(
-      middlewaresAutenticacao.bearer,
+      //middlewaresAutenticacao.bearer,
       postsControlador.adiciona
     );
 };
