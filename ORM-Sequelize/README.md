@@ -1,1 +1,1 @@
-Sistema de controle de escola Utilizando MySql e Sequelize
+Sistema de controle de escola utilizando MySql e Sequelize
