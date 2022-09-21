@@ -18,7 +18,7 @@ module.exports = (app) => {
     .post(usuariosControlador.adiciona)
     .get(usuariosControlador.lista);
 
-  app.route('/usuario/verifica_email/:id').get(middlewaresAutenticacao.vericacaoEmail, usuariosControlador.verificaEmail);
+  app.route('/usuario/verifica_email/:token').get(middlewaresAutenticacao.vericacaoEmail, usuariosControlador.verificaEmail);
 
   app
     .route('/usuario/:id')

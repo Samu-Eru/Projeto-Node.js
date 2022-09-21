@@ -12,7 +12,7 @@ module.exports = {
         if (erro && erro.name === 'InvalidArgumentError') {
           return res.status(401).json({ erro: erro.message });
         }
-        
+
         if (erro) {
           return res.status(500).json({ erro: erro.message });
         }
@@ -20,7 +20,7 @@ module.exports = {
         if (!usuario) {
           return res.status(401).json();
         }
-        
+
         req.user = usuario;
         return next();
       }
@@ -71,10 +71,23 @@ module.exports = {
       return res.status(500).json({ erro: erro.message });
     }
   },
-  async vericacaoEmail(req,res,next) {
-    const {id} = req.params;
-    const usuario = await Usuario.buscaPorId(id);
-    req.user = usuario;
-    next();
+  async vericacaoEmail(req, res, next) {
+    try {
+      const { token } = req.params;
+      const id = await tokens.verificacaoEmail.verifica(token);
+      const usuario = await Usuario.buscaPorId(id);
+      req.user = usuario;
+      next();
+    } catch (erro) {
+      if(erro.name === 'JsonWebTokenError') {
+        return res.status(401).json({erro: erro.message});
+      }
+
+      if(erro.name === 'TokenExpiredError'){
+        return res.status(401).json({erro: erro.message, expiradoEm: erro.expiredAt});
+      }
+
+      return res.status(500).json({erro: erro.message});
+    }
   }
 };
