@@ -25,7 +25,9 @@ module.exports = {
       const endereco = geraEndereco('/usuario/verifica_email/', usuario.id);
       const emailVerificacao = new EmailVerificacao(usuario, endereco);
       emailVerificacao.enviaEmail().catch(console.log);
-
+      console.log(accessToken);  
+      console.log();  
+      
       res.status(201).json();
     } catch (erro) {
       if (erro instanceof InvalidArgumentError) {
@@ -39,7 +41,7 @@ module.exports = {
     try {
       const accessToken = tokens.access.cria(req.user.id);
       const refreshToken = await tokens.refresh.cria(req.user.id);
-      res.set('Authorization', accessToken);    
+      res.set('Authorization', accessToken);  
       res.status(200).json({ refreshToken });
     } catch (erro) {
       res.status(500).json({ erro: erro.message });
@@ -62,6 +64,16 @@ module.exports = {
       res.json(usuarios);
     } catch (erro) {
       res.status(500).json({ erro: erro.message });
+    }
+  },
+
+  async verificaEmail(req, res){
+    try {
+      const usuario = req.user;
+      await usuario.verificaEmail();
+      res.status(200).json();
+    } catch (erro) {
+      res.status(500).json({erro: erro.message});
     }
   },
 

@@ -16,7 +16,7 @@ class Email {
 class EmailVerificacao extends Email {
   constructor(usuario, endereco) {
     super();
-    this.from = '"Blog do Código" <noreply@blogdocodigo.com.br>';
+    this.from = '"Samueru" <noreply@samueru.com.br>';
     this.to = usuario.email;
     this.subject = 'Verificação de e-mail';
     this.text = `Olá! Verifique seu e-mail aqui: ${endereco}`;
